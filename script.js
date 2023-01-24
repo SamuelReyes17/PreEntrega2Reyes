@@ -1,46 +1,68 @@
-const sumar = (num1, num2) => {
-  return parseInt(num1) + parseInt(num2);
+let calculadora = {
+  history: [],
+  add: function (num1, num2) {
+    let result = num1 + num2;
+    this.history.push(`${num1} + ${num2} = ${result}`);
+    return parseFloat(result);
+  },
+  substract: function (num1, num2) {
+    let result = num1 - num2;
+    this.history.push(`${num1} - ${num2} = ${result}`);
+    return parseFloat(result);
+  },
+  multiply: function (num1, num2) {
+    let result = num1 * num2;
+    this.history.push(`${num1} * ${num2} = ${result}`);
+    return parseFloat(result);
+  },
+  divide: function (num1, num2) {
+    let result = num1 / num2;
+    this.history.push(`${num1} / ${num2} = ${result}`);
+    return parseFloat(result);
+  },
+  percentage: function (num1, num2) {
+    let result = (num1 * num2) / 100;
+    this.history.push(`${num1} * ${num2} / 100 = ${result}`);
+    return parseFloat(result);
+  },
+  showHistory: function () {
+    console.log(this.history);
+  },
 };
+while (true) {
+  let num1 = parseFloat(prompt("Ingresa el primer numero"));
+  let num2 = parseFloat(prompt("Ingresa el segundo nmumero"));
+  let operation = prompt("Ingrese la operacion a realizar: +, -, *, /, %");
+  let result;
+  switch (operation) {
+    case "+":
+      result = calculadora.add(num1, num2);
+      break;
+    case "-":
+      result = calculadora.substract(num1, num2);
+      break;
+    case "/":
+      result = calculadora.divide(num1, num2);
+      break;
+    case "*":
+      result = calculadora.multiply(num1, num2);
+      break;
+    case "%":
+      result = calculadora.percentage(num1, num2);
+      break;
 
-const restar = (num1, num2) => {
-  return parseInt(num1) - parseInt(num2);
-};
+    default:
+      alert("Operacion invalida");
+  }
 
-const dividir = (num1, num2) => {
-  return parseInt(num1) / parseInt(num2);
-};
+  if (result) {
+    alert("El resultado es " + result);
+  }
 
-const multiplicar = (num1, num2) => {
-  return parseInt(num1) * parseInt(num2);
-};
-
-alert("Que operacion deseas realizar?");
-let operacion = prompt("1: suma, 2: resta, 3: division, 4: multiplicacion");
-
-let operaciones = [];
-console.log(operaciones);
-
-if (operacion == 1) {
-  let numero1 = prompt("primer numero para sumar");
-  let numero2 = prompt("segundo numero para sumar");
-  resultado = sumar(numero1, numero2);
-  alert(`tu resultado es ${resultado}`);
-  operaciones.push(resultado);
-} else if (operacion == 2) {
-  let numero1 = prompt("primer numero para restar");
-  let numero2 = prompt("segundo numero para restar");
-  resultado = restar(numero1, numero2);
-  alert(`tu resultado es ${resultado}`);
-} else if (operacion == 3) {
-  let numero1 = prompt("primer numero para dividir");
-  let numero2 = prompt("segundo numero para dividir");
-  resultado = dividir(numero1, numero2);
-  alert(`tu resultado es ${resultado}`);
-} else if (operacion == 4) {
-  let numero1 = prompt("primer numero para multiplicar");
-  let numero2 = prompt("segundo numero para multiplicar");
-  resultado = multiplicar(numero1, numero2);
-  alert(`tu resultado es ${resultado}`);
-} else {
-  alert("No se ha encontrado la operacion");
+  calculadora.showHistory();
+  let repeat = prompt("Desea realizar otra operacion? si / no");
+  if (repeat === "no") {
+    break;
+    alert("Gracias por tu tiempo");
+  }
 }
